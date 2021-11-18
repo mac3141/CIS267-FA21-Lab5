@@ -1,15 +1,40 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <nav>NAVIGATION</nav>
+
+  <PartyPokemon 
+    :partyPokemon="pp"
+    @remove-pokemon="remove"
+    />
+
+  <footer> &copy; 2021 </footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+import PartyPokemon from "./components/PartyPokemon.vue"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    PartyPokemon
+  },
+  data() {
+    return {
+      pp: [
+        {name:"Charmader", id: 3},
+        {name:"Bulbasaur", id: 2},
+        {name:"Pikachu", id: 4}
+        ]
+    }
+  },
+  methods: {
+    remove(id) {
+      this.pp = this.pp.filter( p => p.id!= id);
+    },
+
+    loadAllPokemon() {
+      //load all pokemon from API
+    }
   }
 }
 </script>
