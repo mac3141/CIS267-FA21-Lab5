@@ -1,6 +1,7 @@
 <template>
   <div class="mt-2" id="all">
-    <h4>All Pokemon</h4>
+    <h4>Search Results:</h4>
+    <div class="poke-container" v-show="filteredPokemon.length==0">No results.</div>
     <div class="poke-container">
       <!-- Pokemon go here -->
       <PokemonCard

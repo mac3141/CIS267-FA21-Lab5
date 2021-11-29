@@ -48,8 +48,18 @@
     @clear-party="clearParty"
   />
 
-  <AllPokemon :allPokemon="all" @add-party="addToParty" />
-  <FilteredPokemon :filteredPokemon="filtered" @add-party="addToParty" />
+  <AllPokemon
+    ref="allPokemonEl"
+    v-show="searchIsEmpty"
+    :allPokemon="all"
+    @add-party="addToParty"
+  />
+
+  <FilteredPokemon
+    v-show="!searchIsEmpty"
+    :filteredPokemon="filtered"
+    @add-party="addToParty"
+  />
 
   <footer>&copy; 2021</footer>
 </template>
@@ -116,7 +126,7 @@ export default {
       console.log(searchQuery);
 
       // search by name, id, or type
-      for (let pokemon of this.all) {
+      this.filtered = this.all.filter((pokemon) => {
         if (searchQuery == "") {
           this.searchIsEmpty = true;
           this.filtered = [];
@@ -124,20 +134,19 @@ export default {
           !(
             pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             pokemon.id.toString().includes(searchQuery) ||
-            this.pokemonTypeString(pokemon).includes(searchQuery)
+            this.$refs.allPokemonEl.$refs.pokemonCardEl.pokemonTypeString(pokemon).includes(searchQuery)
           )
         ) {
           this.searchIsEmpty = false;
         } else if (
           pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           pokemon.id.toString().includes(searchQuery) ||
-          this.pokemonTypeString(pokemon).includes(searchQuery)
+          this.$refs.allPokemonEl.$refs.pokemonCardEl.pokemonTypeString(pokemon).includes(searchQuery)
         ) {
           this.searchIsEmpty = false;
-          this.filtered.push(pokemon);
+          return true;
         }
-      }
-
+      });
       console.log(this.filtered);
     },
   },

@@ -4,6 +4,7 @@
     <div class="poke-container">
       <!-- Pokemon go here -->
       <PokemonCard
+        ref="pokemonCardEl"
         v-for="p in allPokemon"
         :key="p"
         :pokemon="p"
