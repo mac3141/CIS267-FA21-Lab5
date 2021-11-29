@@ -134,14 +134,18 @@ export default {
           !(
             pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             pokemon.id.toString().includes(searchQuery) ||
-            this.$refs.allPokemonEl.$refs.pokemonCardEl.pokemonTypeString(pokemon).includes(searchQuery)
+            this.$refs.allPokemonEl.$refs.pokemonCardEl
+              .pokemonTypeString(pokemon)
+              .includes(searchQuery)
           )
         ) {
           this.searchIsEmpty = false;
         } else if (
           pokemon.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           pokemon.id.toString().includes(searchQuery) ||
-          this.$refs.allPokemonEl.$refs.pokemonCardEl.pokemonTypeString(pokemon).includes(searchQuery)
+          this.$refs.allPokemonEl.$refs.pokemonCardEl
+            .pokemonTypeString(pokemon)
+            .includes(searchQuery)
         ) {
           this.searchIsEmpty = false;
           return true;
@@ -160,7 +164,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Mohave:wght@300;400;600;700&display=swap");
 
 footer {
-  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
 }
 
 nav div a h1 {
