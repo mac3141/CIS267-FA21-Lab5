@@ -4,7 +4,7 @@
     <div class="poke-container">
       <!-- Pokemon go here -->
       <PokemonCard
-        v-for="p in allPokemon"
+        v-for="p in filteredPokemon"
         :key="p"
         :pokemon="p"
         @card-click="addToParty(p)"
@@ -22,7 +22,7 @@ export default {
     PokemonCard,
   },
   props: {
-    allPokemon: Array,
+    filteredPokemon: Array,
   },
   methods: {
     addToParty(pokemon) {

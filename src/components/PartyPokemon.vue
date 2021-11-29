@@ -1,9 +1,20 @@
 <template>
-  <div id="party">
-    <h4>Party: {{ partyPokemon.length }} of 6</h4>
-    <div class="party-pokemon">
+  <div class="mt-2" id="party">
+    <h4>
+      Party: {{ partyPokemon.length }} of 6
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm"
+        v-show="!partyPokemonIsEmpty"
+        @click="emitClear"
+      >
+        Clear
+      </button>
+    </h4>
+    <div class="party-pokemon" id="subParty">
       <!-- Party pokemon go here -->
       <PokemonCard
+        id="partyCards"
         v-for="p in partyPokemon"
         :key="p"
         :pokemon="p"
@@ -36,14 +47,40 @@ export default {
     removeFromParty(pokemon) {
       this.$emit("remove-party", pokemon);
     },
+    emitClear() {
+      this.$emit("clear-party");
+    },
   },
 };
 </script>
 
 <style scoped>
+h4 {
+  font-weight: bold;
+}
+
 .party-pokemon {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
+}
+
+#party {
+  margin: 10px;
+  min-height: 20vh;
+}
+
+#subParty {
+  margin: 0;
+}
+
+#partyCards {
+  transform: scale(0.8);
+  align-items: flex-start;
+  margin: 0;
+}
+
+#partyCards:hover {
+  transform: scale(0.84);
 }
 </style>
